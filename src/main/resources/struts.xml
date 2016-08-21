@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+
+
+    <!--常量-->
+    <constant name="struts.devMode" value="true"/>
+
+    <!--标签主题，简单风格-->
+
+    <constant name="struts.ui.theme" value="simple" />
+    <!--<constant name="struts.objectFactory" value="spring" />-->
+
+    <package name="common" namespace="/" extends="struts-default" >
+
+
+        <interceptors>
+            <interceptor name="loginInterceptor" class="info.dabu.web.LoginInterceptor" >
+                <!--不拦截 login方法-->
+                <param name="excludeMethods" >login</param>
+
+
+            </interceptor>
+            <interceptor-stack name="loginStack" >
+                <interceptor-ref name="loginInterceptor" />
+
+                <interceptor-ref name="defaultStack" />
+
+
+            </interceptor-stack>
+
+
+        </interceptors>
+
+
+        <!--设置默认拦截栈-->
+        <default-interceptor-ref name="loginStack" />
+
+
+        <!--第一个星匹配文件夹名称，通过{1}获取                      -->
+        <!--第二个星匹配jsp文件名称，通过{2}获取-->
+
+
+
+        <!--声明全局结果-->
+        <global-results>
+            <result name="login" >/WEB-INF/pages/login.jsp</result>
+        </global-results>
+
+
+        <action name="uiAction_*_*">
+            <result >/WEB-INF/pages/{1}/{2}.jsp</result>
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack" />
+        </action>
+    </package>
+
+
+
+
+
+    <!-- 3 加载其他配置文件 -->
+    <include file="struts-staff.xml" />
+
+
+
+</struts>
