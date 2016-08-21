@@ -6,6 +6,8 @@ import com.opensymphony.xwork2.ModelDriven;
 import info.dabu.staff.domain.CrmStaff;
 import info.dabu.staff.service.StaffService;
 
+import java.util.List;
+
 /**
  * Created by AlexY on 2016/8/21.
  */
@@ -93,4 +95,33 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     }
 
 
+    /**
+     * 查询所有员工
+     * @return
+     */
+    public String findAll(){
+
+
+        List<CrmStaff> allStaff = staffService.findAllStaff();
+
+        System.out.println("allStaff.size="+ allStaff.size());
+
+
+//        将结果放到值栈，方便jsp取出数据
+//         2 将结果存放到值栈，方便jsp获得数据
+//         * 方式1：context (map)存放 put(key ,value) ，jsp页面获得 “#key” 。
+//        		ActionContext.getContext().put(key, value)
+//         * 方式2：root (值栈) ，push(obj) ，一般数据为JavaBean 或 Map ，jsp页面获得“属性名” 或“key”  。
+//        		ActionContext.getContext().getValueStack().push(o)
+//         * 方式3：root (值栈) ，set(key ,value) ,一般数据为List ，jsp页面获得“key”
+//        		set() 底层 new Map(key,value) ，将 push(map )
+
+        // 使用 context存放数据
+        ActionContext.getContext().put("allStaff", allStaff);
+
+
+
+        return "findAll";
+
+    }
 }

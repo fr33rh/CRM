@@ -11,6 +11,7 @@
 <div class="dtree">
 	<script type="text/javascript">
 		d = new dTree('d','${pageContext.request.contextPath}');
+//		第一个参数是层级，第二个参数是父层
 		d.add('01','-1','CRM管理系统');
 		d.add('0101','01','咨询部');
 		d.add('010101','0101','咨询学生管理','${pageContext.request.contextPath}/pages/refer/listRefer.jsp?status=1','','right');
@@ -29,7 +30,7 @@
 		d.add('0105','01','人力资源部');
 		d.add('010501','0105','部门管理','${pageContext.request.contextPath}/pages/department/listDepartment.jsp','','right');
 		d.add('010502','0105','职务管理','${pageContext.request.contextPath}/pages/post/listPost.jsp','','right');
-		d.add('010503','0105','员工管理','${pageContext.request.contextPath}/pages/staff/listStaff.jsp','','right');
+		d.add('010503','0105','员工管理','${pageContext.request.contextPath}/pages/staff/staffAction_findAll','','right');
 		
 		document.write(d);
 	</script>

@@ -21,6 +21,8 @@
 
             <result name="home" >/WEB-INF/pages/frame.jsp</result>
 
+            <result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+
         </action>
 
 
