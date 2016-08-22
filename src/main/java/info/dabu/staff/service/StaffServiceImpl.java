@@ -15,6 +15,9 @@ public class StaffServiceImpl implements StaffService {
     private StaffDao staffDao;
 
 
+
+
+
     public StaffServiceImpl() {
 
         System.out.println("@StaffServiceImpl");
@@ -40,10 +43,31 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.find(staff.getLoginName(), MyStringUtils.getMD5Value( staff.getLoginPwd()));
     }
 
+
+    /**
+     * 查询所有员工
+     * @return
+     */
     @Override
     public List<CrmStaff> findAllStaff() {
 
 
         return staffDao.findAll();
     }
+
+    /**
+     * 根据id查找员工
+     * @param staffId
+     * @return
+     */
+    public CrmStaff findById(String staffId){
+
+
+        return staffDao.findById(staffId);
+    }
+
+
+
+
+
 }

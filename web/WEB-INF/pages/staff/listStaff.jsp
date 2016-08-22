@@ -98,8 +98,16 @@
 
 		  <td width="7%" align="center">
 	  		
-	  		<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	
-	  	</td>
+
+
+			<%--编辑前的查询操作--%>
+		  <s:a action="staffAction_editUI" >
+
+			  <s:param name="staffId" value="staffId" />
+			  <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" />
+		  </s:a>
+
+		  </td>
 	  	
 	  </tr>
 

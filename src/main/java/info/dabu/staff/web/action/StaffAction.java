@@ -57,11 +57,11 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     public String login() {
 
 
-        if ( staffService == null){
+        if (staffService == null) {
 
-            System.out.println( "staffService is null");
-        }else {
-            System.out.println( "staffService not null");
+            System.out.println("staffService is null");
+        } else {
+            System.out.println("staffService not null");
 
         }
 
@@ -88,23 +88,25 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 
     /**
      * 显示首页
+     *
      * @return
      */
-    public String home(){
+    public String home() {
         return "home";
     }
 
 
     /**
      * 查询所有员工
+     *
      * @return
      */
-    public String findAll(){
+    public String findAll() {
 
 
         List<CrmStaff> allStaff = staffService.findAllStaff();
 
-        System.out.println("allStaff.size="+ allStaff.size());
+        System.out.println("allStaff.size=" + allStaff.size());
 
 
 //        将结果放到值栈，方便jsp取出数据
@@ -120,8 +122,31 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
         ActionContext.getContext().put("allStaff", allStaff);
 
 
-
         return "findAll";
 
     }
+
+
+    /**
+     * 编辑前操作
+     *
+     * @return
+     */
+    public String editUI() {
+//        通过id查询员工
+
+
+        CrmStaff findStaff = this.staffService.findById(staff.getStaffId());
+
+        ActionContext.getContext().getValueStack().push(findStaff);
+
+//        查询所有部门
+
+
+
+
+        return "editUI";
+    }
+
+
 }
