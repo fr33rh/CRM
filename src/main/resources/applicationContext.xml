@@ -67,6 +67,6 @@
     <!-- 4.1 员工 -->
     <import resource="applicationContext-staff.xml"/>
     <import resource="applicationContext-department.xml" />
-
+    <import resource="applicationContext-post.xml"/>
 
 </beans>

@@ -27,7 +27,8 @@
 
             </interceptor>
             <interceptor-stack name="loginStack" >
-                <interceptor-ref name="loginInterceptor" />
+                <!--为了方便测试，注释掉-->
+                <!--<interceptor-ref name="loginInterceptor" />-->
 
                 <interceptor-ref name="defaultStack" />
 
@@ -66,6 +67,7 @@
 
     <!-- 3 加载其他配置文件 -->
     <include file="struts-staff.xml" />
+    <include file="struts-post.xml"/>
 
 
 

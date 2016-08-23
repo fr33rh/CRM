@@ -29,6 +29,9 @@ public class CrmPost {
 	//一对多： 一个职务 可以有 【多个员工】
 	private Set<CrmStaff> staffSet = new HashSet<CrmStaff>();
 
+
+
+
 	public String getPostId() {
 		return postId;
 	}

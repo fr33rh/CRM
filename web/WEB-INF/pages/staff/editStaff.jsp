@@ -72,7 +72,7 @@
 
                     <%--选择所属部门--%>
                 <s:select list="allDepartment" name="post.department.depId" onchange="showPost(this)"
-                          listKey="depId"  listValue="depName"
+                          listKey="depId" listValue="depName"
                           headerKey="" headerValue="----请--选--择----">
 
                 </s:select>
@@ -81,19 +81,15 @@
             </td>
             <td width="8%">职务：</td>
             <td width="62%">
-                <select name="crmPost.postId" id="postSelectId">
-                    <option value="">----请--选--择----</option>
-                    <option value="2c9091c14c78e58b014c78e6b34a0003">总监</option>
-                    <option value="2c9091c14c78e58b014c78e6d4510004" selected="selected">讲师</option>
-                </select>
 
-                <%--避免post为null --%>
-                <s:select list="post !=null ? post.department.postSet:{}"  name="post.postId"
-                  listKey="postId" listValue="postName"
+
+                    <%--避免post为null --%>
+                <s:select list="post !=null ? post.department.postSet:{}" name="post.postId"
+                          listKey="postId" listValue="postName"
                           headerKey="" headerValue="----请--选--择----"
+                          id="postSelectId"
                 >
                 </s:select>
-
 
 
             </td>
@@ -113,6 +109,91 @@
         </tr>
     </table>
 </s:form>
+
+
+<script>
+    function showPost(obj) {
+//         获得险种的部门
+        var depId = obj.value;
+
+
+//         发送ajax，通过部门查询职务
+
+//         1.获得引擎
+        var xmlhttp = null;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+
+//         设置回调函数
+        xmlhttp.onreadystatechange = function () {
+
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+
+//                    返回的json字符串为：
+//                    [{"postId":"2c9091c14c78e58b014c78e6f2340005","postName":"主管"}]
+///                      将json字符串解析为js对象
+
+                    var jsonData = JSON.parse("{\"sss\":" + xmlhttp.responseText + "}");
+//                    该js对象的json字符串为：
+//                    {
+//                        "sss":[
+//                        {
+//                            "postId":"2c9091c14c78e58b014c78e6b34a0003",
+//                            "postName":"总监"
+//                        },
+//                        {
+//                            "postId":"2c9091c14c78e58b014c78e6d4510004",
+//                            "postName":"讲师"
+//                        }
+//                    ]
+//                    }
+
+                    // 也可以使用eval函数
+                    //  var jsonData = eval("("+xmlhttp.responseText+")");
+
+
+//                       // 获得select对象，职务选择
+                    var postSelectElement = document.getElementById("postSelectId");
+
+//                    先清空 ，等价于初始化
+                    postSelectElement.innerHTML =  "<option value=''>----请--选--择----</option>";
+
+                    var arry = jsonData.sss;
+//                    遍历
+                    for ( var i = 0; i < arry.length; i++){
+                        var postObj = arry[i];
+                        var postId = postObj.postId;
+
+                        var postName = postObj.postName;
+
+                        //3.3 将数显示到select标签
+                        postSelectElement.innerHTML += "<option value='"+postId+"'>"+postName+"</option>";
+                    }
+
+
+                }
+            }
+
+        };
+
+
+        //2.3 创建连接
+        var url = "${pageContext.request.contextPath}/postAction_findAllWithDepartment?department.depId=" + depId;
+        xmlhttp.open("GET", url);
+        //2.4 发送请求
+        xmlhttp.send(null);
+
+
+    }
+
+
+</script>
 
 </body>
 </html>
