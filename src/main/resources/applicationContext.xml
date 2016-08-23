@@ -66,6 +66,7 @@
     <!-- 4 导入其他配置文件 -->
     <!-- 4.1 员工 -->
     <import resource="applicationContext-staff.xml"/>
+    <import resource="applicationContext-department.xml" />
 
 
 </beans>

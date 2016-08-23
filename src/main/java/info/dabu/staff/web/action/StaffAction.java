@@ -3,6 +3,8 @@ package info.dabu.staff.web.action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import info.dabu.department.domain.CrmDepartment;
+import info.dabu.department.service.DepartmentService;
 import info.dabu.staff.domain.CrmStaff;
 import info.dabu.staff.service.StaffService;
 
@@ -19,6 +21,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     private StaffService staffService;
 
     private CrmStaff staff = new CrmStaff();
+    private DepartmentService departmentService;
 
     @Override
     public CrmStaff getModel() {
@@ -44,6 +47,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 
     public void setStaffService(StaffService staffService) {
         this.staffService = staffService;
+    }
+
+    public DepartmentService getDepartmentService() {
+        return departmentService;
+    }
+
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     ///////////////////////////
@@ -140,9 +151,12 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 
         ActionContext.getContext().getValueStack().push(findStaff);
 
-//        查询所有部门
 
 
+        //2 查询所有部门
+        List<CrmDepartment> allDepartment = departmentService.findAll();
+        // * jsp页面通过“key”获得
+        ActionContext.getContext().getValueStack().set("allDepartment",allDepartment);
 
 
         return "editUI";
