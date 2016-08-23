@@ -68,6 +68,7 @@
     <!-- 3 加载其他配置文件 -->
     <include file="struts-staff.xml" />
     <include file="struts-post.xml"/>
+    <include file="struts-coursetype.xml" />
 
 
 
