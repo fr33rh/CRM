@@ -163,4 +163,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
     }
 
 
+
+    /**
+     * 编辑
+     * @return
+     */
+    public String edit(){
+        this.staffService.updateStaff(staff);
+        return "edit";
+    }
+
 }

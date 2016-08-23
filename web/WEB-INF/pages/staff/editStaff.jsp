@@ -36,10 +36,10 @@
     </tr>
 </table>
 
-<s:form method="post">
+<s:form method="post"  action="staffAction_edit" namespace="/">
 
-    <%--<input type="hidden" name="staffId" value="2c9091c14c78e58b014c78e7ecd90007"/>--%>
-
+    <%--用于回传员工staffId，实现数据库的更新--%>
+    <s:hidden name="staffId" value="%{staffId}" ></s:hidden>
     <table width="88%" border="0" class="emp_table" style="width:80%;">
         <tr>
             <td>登录名：</td>

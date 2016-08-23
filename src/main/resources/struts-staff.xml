@@ -9,29 +9,35 @@
 <struts>
 
 
+    <package name="sta" namespace="/" extends="common">
 
-    <package name="sta" namespace="/" extends="common" >
-
-        <action name="staffAction_*" class="info.dabu.staff.web.action.StaffAction" method="{1}" >
+        <action name="staffAction_*" class="info.dabu.staff.web.action.StaffAction" method="{1}">
 
             <!--登录成功-->
-            <result name="success" type="redirectAction" >staffAction_home</result>
+            <result name="success" type="redirectAction">staffAction_home</result>
 
             <!--这里需要将结果设置为全局的，所以注释了-->
             <!--<result name="login" >/WEB-INF/pages/login.jsp</result>-->
 
-            <result name="home" >/WEB-INF/pages/frame.jsp</result>
+            <result name="home">/WEB-INF/pages/frame.jsp</result>
 
             <result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
-            <result name="editUI" > /WEB-INF/pages/staff/editStaff.jsp</result>
+            <result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+            <!-- 6 编辑成功
+      * 重定向可以注入详细配置
+      * 默认使用
+          <result name="success" type="redirectAction">staffAction_home</result>
+          给actionName进行注入
+  -->
+            <result name="edit" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">staffAction_findAll</param>
+            </result>
 
         </action>
 
 
-
     </package>
-
-
 
 
 </struts>
