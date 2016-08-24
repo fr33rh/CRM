@@ -37,4 +37,7 @@ public interface CourseTypeDao {
      */
     public void saveOrUpdate(CrmCourseType courseType);
 
+    int getTotalRecord(String condition, Object[] params);
+
+    List<CrmCourseType> findAll(String condition, Object[] params, int startIndex, int pageSize);
 }

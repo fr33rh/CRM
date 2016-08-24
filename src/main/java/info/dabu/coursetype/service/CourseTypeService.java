@@ -1,6 +1,7 @@
 package info.dabu.coursetype.service;
 
 import info.dabu.coursetype.domain.CrmCourseType;
+import info.dabu.page.PageBean;
 
 import java.util.List;
 
@@ -34,4 +35,8 @@ public interface CourseTypeService {
      * @param courseType
      */
     public void addOrEdit(CrmCourseType courseType);
+
+
+
+    public PageBean<CrmCourseType> findAll(CrmCourseType courseType, int pageNum, int pageSize);
 }

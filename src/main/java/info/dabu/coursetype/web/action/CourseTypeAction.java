@@ -5,9 +5,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import info.dabu.coursetype.domain.CrmCourseType;
 import info.dabu.coursetype.service.CourseTypeService;
+import info.dabu.page.PageBean;
 import org.apache.commons.lang.StringUtils;
-
-import java.util.List;
 
 /**
  * Created by AlexY on 2016/8/24.
@@ -35,6 +34,20 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
     }
 
 
+
+    //分页数据
+    private int pageNum = 1;
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+    private int pageSize = 2;  //固定值
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+
+
+
 //////////////////////////////////////////////////
 
     /**
@@ -50,11 +63,16 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
 //        ActionContext.getContext().put("allCourseType", allCourseType);
 
 
-//        条件查询
-        List<CrmCourseType> allCourseType = this.courseTypeService.findAll(courseType);
-        // * 查询结果存在值栈 , jsp 通过“#key”获得
-        ActionContext.getContext().put("allCourseType", allCourseType);
+////        条件查询
+//        List<CrmCourseType> allCourseType = this.courseTypeService.findAll(courseType);
+//        // * 查询结果存在值栈 , jsp 通过“#key”获得
+//        ActionContext.getContext().put("allCourseType", allCourseType);
 
+
+
+        //3 分页 + 条件
+        PageBean<CrmCourseType> pageBean = this.courseTypeService.findAll(courseType, pageNum, pageSize);
+        ActionContext.getContext().put("pageBean", pageBean);
 
         return "findAll";
     }

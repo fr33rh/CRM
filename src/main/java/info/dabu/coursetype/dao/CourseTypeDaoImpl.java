@@ -1,6 +1,7 @@
 package info.dabu.coursetype.dao;
 
 import info.dabu.coursetype.domain.CrmCourseType;
+import info.dabu.page.PageHibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.util.List;
@@ -43,5 +44,37 @@ public class CourseTypeDaoImpl extends HibernateDaoSupport implements CourseType
     @Override
     public void saveOrUpdate(CrmCourseType courseType) {
         this.getHibernateTemplate().saveOrUpdate(courseType);
+    }
+
+    /**
+     * 查询总条数
+     * @param condition
+     * @param params
+     * @return
+     */
+    @Override
+    public int getTotalRecord(String condition, Object[] params) {
+
+
+        String hql = "select count(*) from CrmCourseType c where 1=1  "+ condition;
+
+        List<Long> list =  this.getHibernateTemplate().find(hql,params);
+
+        return list.get(0).intValue();
+    }
+
+
+    /**
+     * 分页查询
+     * @param condition
+     * @param params
+     * @param startIndex
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<CrmCourseType> findAll(String condition, Object[] params, int startIndex, int pageSize) {
+        String hql = "from CrmCourseType where 1=1 " + condition;
+        return this.getHibernateTemplate().execute(new PageHibernateCallback<CrmCourseType>().setHql(hql).setParams(params).setPageSize(pageSize).setStartIndex(startIndex));
     }
 }
