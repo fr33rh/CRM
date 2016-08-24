@@ -13,8 +13,15 @@
         <action name="courseTypeAction_*" class="info.dabu.coursetype.web.action.CourseTypeAction" method="{1}">
             <!-- 查询所有 -->
             <result name="findAll">/WEB-INF/pages/coursetype/listCourse.jsp</result>
-        </action>
 
+            <!-- 2 添加或编辑，显示jsp页面 -->
+            <result name="addOrEditUI">/WEB-INF/pages/coursetype/addOrEditCourse.jsp</result>
+            <!-- 3 添加或编辑成功 -->
+            <result name="addOrEdit" type="redirectAction">courseTypeAction_findAll</result>
+
+
+
+        </action>
 
 
     </package>

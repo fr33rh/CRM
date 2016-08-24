@@ -28,8 +28,13 @@ public class CrmCourseType implements Serializable{
     // 表单对应字段--用于条件查询（可以另外编写javabean）
     private String totalStart;		//学时开始
     private String totalEnd;		//学时结束
-    private String lessonCostStart;	//金额开始
-    private String lessonCostEnd;	//金额结束
+    private String  lessonCostStart;	//金额开始
+    private String  lessonCostEnd;	//金额结束
+
+
+
+
+
     public String getCourseTypeId() {
         return courseTypeId;
     }
@@ -78,18 +83,20 @@ public class CrmCourseType implements Serializable{
     public void setTotalEnd(String totalEnd) {
         this.totalEnd = totalEnd;
     }
+
     public String getLessonCostStart() {
         return lessonCostStart;
     }
+
     public void setLessonCostStart(String lessonCostStart) {
         this.lessonCostStart = lessonCostStart;
     }
+
     public String getLessonCostEnd() {
         return lessonCostEnd;
     }
+
     public void setLessonCostEnd(String lessonCostEnd) {
         this.lessonCostEnd = lessonCostEnd;
     }
-
-
 }

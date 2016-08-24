@@ -14,6 +14,27 @@ public interface CourseTypeDao {
      * 查询所有
      * @return
      */
-    public List<CrmCourseType> findAll();
+    List<CrmCourseType> findAll();
+
+    /**
+     * 条件查询
+     * @param condition
+     * @param params
+     * @return
+     */
+    List<CrmCourseType> findAll(String condition,Object[] params);
+
+    /**
+     * 通过id查询详情
+     * @param courseTypeId
+     * @return
+     */
+    public CrmCourseType findById(String courseTypeId);
+
+    /**
+     * 保存或更新
+     * @param courseType
+     */
+    public void saveOrUpdate(CrmCourseType courseType);
 
 }
