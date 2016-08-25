@@ -26,6 +26,7 @@
 
 
             </interceptor>
+            
             <interceptor-stack name="loginStack" >
                 <!--为了方便测试，注释掉-->
                 <!--<interceptor-ref name="loginInterceptor" />-->
@@ -41,6 +42,8 @@
 
         <!--设置默认拦截栈-->
         <default-interceptor-ref name="loginStack" />
+
+
 
 
         <!--第一个星匹配文件夹名称，通过{1}获取                      -->

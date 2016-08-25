@@ -1,84 +1,38 @@
 package info.dabu.coursetype.web.action;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+import info.dabu.base.BaseAction;
 import info.dabu.coursetype.domain.CrmCourseType;
-import info.dabu.coursetype.service.CourseTypeService;
 import info.dabu.page.PageBean;
 import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by AlexY on 2016/8/24.
  */
-public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCourseType> {
 
-
-    private CrmCourseType courseType = new CrmCourseType();
-
-    private CourseTypeService courseTypeService;
-
-
-    @Override
-    public CrmCourseType getModel() {
-        return courseType;
-    }
-
-
-    public CourseTypeService getCourseTypeService() {
-        return courseTypeService;
-    }
-
-    public void setCourseTypeService(CourseTypeService courseTypeService) {
-        this.courseTypeService = courseTypeService;
-    }
-
-
-
-    //分页数据
-    private int pageNum = 1;
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-    private int pageSize = 2;  //固定值
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-
-
-
-//////////////////////////////////////////////////
+public class CourseTypeAction extends BaseAction<CrmCourseType> {
 
     /**
      * 查询所有
-     *
      * @return
      */
-    public String findAll() {
+    public String findAll(){
+		/*1简单查询
+		List<CrmCourseType> allCourseType = this.courseTypeService.findAll();
+		// * 查询结果存在值栈 , jsp 通过“#key”获得
+		ActionContext.getContext().put("allCourseType", allCourseType);
+		*/
 
-//        //1简单查询
-//        List<CrmCourseType> allCourseType = this.courseTypeService.findAll();
-//        // * 查询结果存在值栈 , jsp 通过“#key”获得
-//        ActionContext.getContext().put("allCourseType", allCourseType);
-
-
-////        条件查询
-//        List<CrmCourseType> allCourseType = this.courseTypeService.findAll(courseType);
-//        // * 查询结果存在值栈 , jsp 通过“#key”获得
-//        ActionContext.getContext().put("allCourseType", allCourseType);
-
-
+		/*2 条件查询
+		List<CrmCourseType> allCourseType = this.courseTypeService.findAll(courseType);
+		ActionContext.getContext().put("allCourseType", allCourseType);
+		 */
 
         //3 分页 + 条件
-        PageBean<CrmCourseType> pageBean = this.courseTypeService.findAll(courseType, pageNum, pageSize);
-        ActionContext.getContext().put("pageBean", pageBean);
+        PageBean<CrmCourseType> pageBean = this.getCourseTypeService().findAll(getModel(), getPageNum(), getPageSize());
+        put("pageBean", pageBean);
 
         return "findAll";
     }
-
-
-
 
 
     /**
@@ -87,10 +41,10 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
      */
     public String addOrEditUI(){
         //如果有id就是编辑，编辑需要查询详情
-        if(StringUtils.isNotBlank(this.courseType.getCourseTypeId())){
+        if(StringUtils.isNotBlank(this.getModel().getCourseTypeId())){
             //将查询的详情压入到栈顶，方便标签自动的回显
-            CrmCourseType findCourseType = this.courseTypeService.findById(this.courseType.getCourseTypeId());
-            ActionContext.getContext().getValueStack().push(findCourseType);
+            CrmCourseType findCourseType = this.getCourseTypeService().findById(this.getModel().getCourseTypeId());
+            push(findCourseType);
         }
 
         return "addOrEditUI";
@@ -101,9 +55,17 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
      * @return
      */
     public String addOrEdit(){
-        this.courseTypeService.addOrEdit(courseType);
+        this.getCourseTypeService().addOrEdit(getModel());
         return "addOrEdit";
     }
+
+
+
+
+
+
+
+
 
 
 

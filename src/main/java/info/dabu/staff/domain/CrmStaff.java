@@ -31,6 +31,12 @@ public class CrmStaff {
 	//多对一：多个员工 属于 【一个职务】
 	private CrmPost post;
 
+
+	public CrmStaff() {
+
+		System.out.println("CrmStaff create");
+	}
+
 	public String getStaffId() {
 		return staffId;
 	}
