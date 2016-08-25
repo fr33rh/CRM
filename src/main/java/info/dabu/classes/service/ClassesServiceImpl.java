@@ -26,4 +26,17 @@ public class ClassesServiceImpl implements   ClassesService {
     public List<CrmClass> findAll() {
         return classesDao.findAll();
     }
+
+    @Override
+    public CrmClass findById(String classesId) {
+        return classesDao.findById(classesId);
+    }
+    @Override
+    public void updateUpload(CrmClass classes) {
+        //1先查询，2再更新。快照和一级缓存
+        CrmClass findClass = this.classesDao.findById(classes.getClassId());
+        findClass.setUploadFilename(classes.getUploadFilename());
+        findClass.setUploadPath(classes.getUploadPath());
+        findClass.setUploadTime(classes.getUploadTime());
+    }
 }

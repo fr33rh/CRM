@@ -13,7 +13,12 @@
         <action name="classesAction_*" class="info.dabu.classes.web.action.ClassesAction" method="{1}" >
 
             <result name="findAll">/WEB-INF/pages/classesm/listClass.jsp</result>
-
+            <!-- 2 上传表单页面 -->
+            <result name="uploadUI">/WEB-INF/pages/classesm/uploadClass.jsp</result>
+            <!-- 3 上传成功 -->
+            <result name="upload" type="redirectAction">classesAction_findAll</result>
+            <!-- 4 上传不成功 -->
+            <result name="uploadInput">/WEB-INF/pages/error.jsp</result>
         </action>
 
 

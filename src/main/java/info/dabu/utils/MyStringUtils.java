@@ -3,6 +3,7 @@ package info.dabu.utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * Created by AlexY on 2016/8/22.
@@ -41,4 +42,21 @@ public class MyStringUtils {
 
 
     }
+
+
+
+
+    /**
+     * 获得一个32长度的UUID值
+     * @return
+     */
+    public static String getUUID(){
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+
+
+
+
+
 }

@@ -14,4 +14,25 @@ public interface ClassesService {
      * @return
      */
     List<CrmClass> findAll();
+
+
+
+
+
+
+    /**
+     * 通过id查询详情
+     * @param classesId
+     * @return
+     */
+    public CrmClass findById(String classesId);
+
+    /**
+     * 更新上传
+     * @param model
+     */
+    public void updateUpload(CrmClass model);
+
+
+
 }

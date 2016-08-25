@@ -5,6 +5,7 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 
+<!--suppress ALL -->
 <struts>
 
 
@@ -26,15 +27,32 @@
 
 
             </interceptor>
-            
+
+
+
+
+
+
             <interceptor-stack name="loginStack" >
+
+
                 <!--为了方便测试，注释掉-->
-                <!--<interceptor-ref name="loginInterceptor" />-->
+                <interceptor-ref name="loginInterceptor" />
+
+
+                <!-- 给拦截器栈中的某一个拦截器注入内容时，格式：拦截器.属性 = 值-->
+                <interceptor-ref name="defaultStack">
+                    <param name="fileUpload.allowedExtensions">.xls,.xlsx</param>
+                </interceptor-ref>
+
+
 
                 <interceptor-ref name="defaultStack" />
 
 
             </interceptor-stack>
+
+
 
 
         </interceptors>

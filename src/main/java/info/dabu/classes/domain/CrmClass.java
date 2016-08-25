@@ -52,7 +52,7 @@ CREATE TABLE `crm_class` (
 
     private String uploadPath;		//课表(schedule)路径
     private String uploadFilename;	//上传文件名称
-    private Date uploadTime;		//长传时间
+    private Date uploadTime;		//上传时间
 
     public CrmCourseType getCourseType() {
         return courseType;
