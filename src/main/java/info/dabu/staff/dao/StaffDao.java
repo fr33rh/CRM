@@ -1,14 +1,13 @@
 package info.dabu.staff.dao;
 
+import info.dabu.base.BaseDao;
 import info.dabu.staff.domain.CrmStaff;
-
-import java.util.List;
 
 /**
  * Created by AlexY on 2016/8/21.
  */
 
-public interface StaffDao {
+public interface StaffDao extends BaseDao<CrmStaff>{
 
 
 
@@ -21,19 +20,5 @@ public interface StaffDao {
      */
     public CrmStaff find(String loginName,String loginPwd);
 
-
-    /**
-     * 查询所有员工
-     * @return
-     */
-    List<CrmStaff> findAll();
-
-
-    /**
-     * 根据id查找员工
-     * @param starffId
-     * @return
-     */
-     CrmStaff findById(String starffId);
 
 }

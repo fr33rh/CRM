@@ -1,5 +1,6 @@
 package info.dabu.coursetype.dao;
 
+import info.dabu.base.BaseDaoImpl;
 import info.dabu.coursetype.domain.CrmCourseType;
 import info.dabu.page.PageHibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by AlexY on 2016/8/24.
  */
-public class CourseTypeDaoImpl extends HibernateDaoSupport implements CourseTypeDao {
+public class CourseTypeDaoImpl extends BaseDaoImpl<CrmCourseType> implements CourseTypeDao {
 
 
 
@@ -34,12 +35,7 @@ public class CourseTypeDaoImpl extends HibernateDaoSupport implements CourseType
         return this.getHibernateTemplate().find(hql, params);
     }
 
-    @Override
-    public CrmCourseType findById(String courseTypeId) {
 
-
-        return this.getHibernateTemplate().get(CrmCourseType.class, courseTypeId);
-    }
 
     @Override
     public void saveOrUpdate(CrmCourseType courseType) {
