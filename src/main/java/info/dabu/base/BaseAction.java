@@ -39,6 +39,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
     // * 提供setter方法，让spring进行注入的
     // * 提供getter方法，让子类可以获得spring注入的对象的。
     //员工
+
+    /*
+    因为我们使用Spring来注入Dao和Service的实例，而Spring默认注入是单例的 。
+    但是因为我们只是调用Dao和Servcie的方法，而底层使用的Session对象是线程安全的，所以不会出现并发问题
+     */
+
     private StaffService staffService;
     public void setStaffService(StaffService staffService) {
         this.staffService = staffService;

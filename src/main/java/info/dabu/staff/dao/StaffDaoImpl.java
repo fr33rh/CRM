@@ -10,6 +10,12 @@ import java.util.List;
  */
 public class StaffDaoImpl extends BaseDaoImpl<CrmStaff> implements StaffDao {
 
+
+    public StaffDaoImpl() {
+
+        System.out.println("StaffDaoImpl Create");
+    }
+
     /**
      * 根据用户名和密码查询员工
      * @param loginName

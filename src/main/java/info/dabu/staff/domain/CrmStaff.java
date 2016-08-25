@@ -34,7 +34,7 @@ public class CrmStaff {
 
 	public CrmStaff() {
 
-		System.out.println("CrmStaff create");
+
 	}
 
 	public String getStaffId() {

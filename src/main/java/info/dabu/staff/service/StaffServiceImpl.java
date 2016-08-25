@@ -10,17 +10,16 @@ import java.util.List;
  * Created by AlexY on 2016/8/21.
  */
 public class StaffServiceImpl implements StaffService {
-
-
+    /*
+        注意：因为我们使用Spring来注入Dao的实例，而Spring默认注入是单例的 。
+    但是因为我们只是调用Dao的方法，而底层使用的Session对象是线程安全的，所以不会出现并发问题。
+     */
     private StaffDao staffDao;
-
-
-
 
 
     public StaffServiceImpl() {
 
-        System.out.println("@StaffServiceImpl");
+        System.out.println("StaffServiceImpl create");
     }
 
     public StaffDao getStaffDao() {
@@ -31,7 +30,8 @@ public class StaffServiceImpl implements StaffService {
         this.staffDao = staffDao;
     }
 
-    /**登录
+    /**
+     * 登录
      *
      * @param staff
      * @return
@@ -40,12 +40,13 @@ public class StaffServiceImpl implements StaffService {
     public CrmStaff login(CrmStaff staff) {
 
 
-        return staffDao.find(staff.getLoginName(), MyStringUtils.getMD5Value( staff.getLoginPwd()));
+        return staffDao.find(staff.getLoginName(), MyStringUtils.getMD5Value(staff.getLoginPwd()));
     }
 
 
     /**
      * 查询所有员工
+     *
      * @return
      */
     @Override
@@ -57,10 +58,11 @@ public class StaffServiceImpl implements StaffService {
 
     /**
      * 根据id查找员工
+     *
      * @param staffId
      * @return
      */
-    public CrmStaff findById(String staffId){
+    public CrmStaff findById(String staffId) {
 
 
         return staffDao.findById(staffId);
@@ -68,7 +70,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void updateStaff(CrmStaff staff) {
-		/* 1 方法1：判断密码是否32长度，
+        /* 1 方法1：判断密码是否32长度，
 		 * * 如果是，密码没有修改，之前（加密后的）
 		 * * 如果不是，密码已经修改了，之后（需要加密）
 		 */
@@ -84,7 +86,7 @@ public class StaffServiceImpl implements StaffService {
 		 * * 原因：一级缓存被修改了，与快照不一致，默认情况下，当提交，自动执行update语句。
 		 */
         CrmStaff findStaff = staffDao.findById(staff.getStaffId());
-        if(! findStaff.getLoginPwd().equals(staff.getLoginPwd())){
+        if (!findStaff.getLoginPwd().equals(staff.getLoginPwd())) {
             findStaff.setLoginPwd(MyStringUtils.getMD5Value(staff.getLoginPwd()));
         }
         findStaff.setLoginName(staff.getLoginName());
@@ -94,7 +96,6 @@ public class StaffServiceImpl implements StaffService {
         findStaff.setPost(staff.getPost());
 
     }
-
 
 
 }
