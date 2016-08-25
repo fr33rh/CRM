@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by AlexY on 2016/8/21.
  *
- * 课程
+ * 班级
  */
 public class CrmClass implements Serializable{
 

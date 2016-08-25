@@ -3,6 +3,7 @@ package info.dabu.base;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import info.dabu.classes.service.ClassesService;
 import info.dabu.coursetype.service.CourseTypeService;
 import info.dabu.department.service.DepartmentService;
 import info.dabu.post.servcie.PostService;
@@ -79,7 +80,16 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
     }
 
 
+//    班级
+    private ClassesService classesService;
 
+    public ClassesService getClassesService() {
+        return classesService;
+    }
+
+    public void setClassesService(ClassesService classesService) {
+        this.classesService = classesService;
+    }
 
     //3 分页数据
     private int pageNum = 1;
